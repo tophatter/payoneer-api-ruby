@@ -10,7 +10,11 @@ client = Payoneer::Client.new(
 )
 => <Payoneer::Client @configuration=<Payoneer::Configuration @partner_id="fake-partner-id", @username="fake-username", @api_password="fake-api-password", @host="api.sandbox.payoneer.com", @auto_approve_sandbox_accounts=true>>
 
-client.status.body
+response = client.status
+response.ok?
+=> true
+
+response.body
 => {
          "Status" => "000",
     "Description" => "Echo Ok - All systems are up."
@@ -24,7 +28,7 @@ client.version.body
 client.payee_signup_url('test').body
 => "https://payouts.sandbox.payoneer.com/partners/lp.aspx?token=fake-token"
 
-client.payee_details('test').body
+client.payee_details('fake-payee-id').body
 => {"FirstName"=>"Foo",
   "LastName"=>"Bar",
   "Email"=>"foo@bar.com",
@@ -48,6 +52,7 @@ client.payee_details('test').body
     "AccountNumber"=>"123456789",
     "RoutingNumber"=>"121042882",
     "AccountType"=>"S"}}
+```
 
 ## Development
 

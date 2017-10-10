@@ -1,0 +1,38 @@
+AllCops:
+  TargetRubyVersion: 2.2
+
+Metrics/AbcSize:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+
+Lint/EndAlignment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+Style/IndentationWidth:
+  Enabled: false
+Style/ElseAlignment:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+
+# This is temporary - it can be remove after updating rubocop to the latest.
+Style/PercentLiteralDelimiters:
+  Enabled: false

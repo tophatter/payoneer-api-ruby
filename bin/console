@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup' # Otherwise "require 'payoneer'" won't work.
+require 'payoneer'
+require 'awesome_print'
+require 'pry'
+
+# Payoneer.logger = Logger.new(STDOUT)
+# Payoneer.logger.level = Logger::DEBUG
+
+AwesomePrint.pry!
+Pry.start
