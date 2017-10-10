@@ -12,9 +12,5 @@ module Payoneer
     def ok?
       code == OK_STATUS_CODE
     end
-
-    def ==(other)
-      code == other.code && body == other.body
-    end
   end
 end
