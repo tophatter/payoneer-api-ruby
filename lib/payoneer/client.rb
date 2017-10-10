@@ -27,8 +27,16 @@ module Payoneer
     end
 
     def payout(program_id:, payment_id:, payee_id:, amount:, description:, payment_date: Time.now, currency: 'USD')
-      amount = '%.2f' % amount
-      post('PerformPayoutPayment', p4: program_id, p5: payment_id, p6: payee_id, p7: amount, p8: description, p9: payment_date.strftime('%m/%d/%Y %H:%M:%S'), Currency: currency)
+      post(
+        'PerformPayoutPayment',
+        p4: program_id,
+        p5: payment_id,
+        p6: payee_id,
+        p7: format('%.2f', amount),
+        p8: description,
+        p9: payment_date.strftime('%m/%d/%Y %H:%M:%S'),
+        Currency: currency
+      )
     end
 
     def payout_details(payee_id:, payment_id:)
