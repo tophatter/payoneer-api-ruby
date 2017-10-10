@@ -1,4 +1,10 @@
-## Usage
+### Install
+
+```
+gem install payoneer-client
+```
+
+### Usage
 
 ```ruby
 client = Payoneer::Client.new(
@@ -54,6 +60,6 @@ client.payee_details('fake-payee-id').body
     "AccountType"=>"S"}}
 ```
 
-## Development
+### Development
 
-After checking out the repo, run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/payoneer-console` for an interactive prompt that will allow you to experiment.
