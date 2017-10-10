@@ -1,10 +1,15 @@
-### Install
+[![Build Status](https://travis-ci.org/tophatter/payoneer-api-ruby.svg?branch=master)](https://travis-ci.org/tophatter/payoneer-api-ruby)
+[![Coverage Status](https://coveralls.io/repos/github/tophatter/payoneer-api-ruby/badge.svg?branch=master)](https://coveralls.io/github/tophatter/payoneer-api-ruby?branch=master)
+
+### Payoneer SDK for Ruby:
+
+#### Install:
 
 ```
 gem install payoneer-client
 ```
 
-### Usage
+#### Usage:
 
 ```ruby
 client = Payoneer::Client.new(
@@ -60,6 +65,6 @@ client.payee_details('fake-payee-id').body
     "AccountType"=>"S"}}
 ```
 
-### Development
+#### Console:
 
-After checking out the repo, run `bin/payoneer-console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/payoneer-console` for an interactive console that will allow you to experiment.
