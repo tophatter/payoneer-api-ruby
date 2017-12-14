@@ -46,7 +46,7 @@ module Payoneer
     private
 
     def post(method_name, params = {})
-      response = RestClient.post(configuration.base_uri, {
+      response = RestClient.post(configuration.xml_base_uri, {
         mname: method_name,
         p1: configuration.username,
         p2: configuration.api_password,
