@@ -61,8 +61,8 @@ module Payoneer
             type: 'url',
             path: path,
             credentials: { # @TODO: What type of credentials? When should we expire?
-                type: 'AUTHORIZATION',
-                token: 'FILL'
+              type: 'AUTHORIZATION',
+              token: 'FILL_ME_IN'
             }
           }
         }

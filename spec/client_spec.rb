@@ -123,7 +123,7 @@ describe Payoneer::Client do
             path: path,
             credentials: {
               type: 'AUTHORIZATION',
-              token: 'FILL'
+              token: 'FILL_ME_IN' # @TODO: Fix this
             }
           }
         }
