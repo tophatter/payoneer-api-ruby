@@ -92,9 +92,9 @@ describe Payoneer::Client do
     let(:seller_id) { 44 }
     let(:seller_name) { 'Fake Seller' }
     let(:seller_url) { 'http://tophatter.dev/users/1' }
-    let(:path) { 'fake_s3@path.com'}
+    let(:path) { 'fake_s3@path.com' }
     let(:endpoint) { "#{configuration.json_base_uri}/payouts" }
-    let(:headers) { { content_type: 'application/json', accept: :json, Authorization: 'Basic ' + Base64::encode64("#{configuration.username}:#{configuration.api_password}").chomp} }
+    let(:headers) { { content_type: 'application/json', accept: :json, Authorization: 'Basic ' + Base64.encode64("#{configuration.username}:#{configuration.api_password}").chomp } }
     let(:response) do
       mock = double
       allow(mock).to receive(:code).and_return(200)
@@ -102,7 +102,7 @@ describe Payoneer::Client do
       mock
     end
 
-    let(:params) {
+    let(:params) do
       { payee_id: payee_id,
         client_reference_id: client_reference_id,
         amount: amount,
@@ -126,9 +126,8 @@ describe Payoneer::Client do
               token: 'FILL_ME_IN' # @TODO: Fix this
             }
           }
-        }
-      }
-    }
+        } }
+    end
 
     it 'generates the correct response' do
       expect(RestClient).to receive(:post).exactly(1).times.with(endpoint, params.to_json, headers).and_return(response)

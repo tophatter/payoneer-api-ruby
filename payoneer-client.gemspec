@@ -14,10 +14,10 @@ Gem::Specification.new do |s|
 
   s.extra_rdoc_files = ['README.md']
 
-  s.required_ruby_version = '~> 2.0'
+  s.required_ruby_version = '~> 2.2'
 
-  s.add_dependency 'rest-client', '~> 1.6'
   s.add_dependency 'activesupport', '~> 4.2'
+  s.add_dependency 'rest-client', '~> 1.6'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

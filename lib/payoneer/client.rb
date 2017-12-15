@@ -68,8 +68,8 @@ module Payoneer
         }
       }
 
-      encoded_credentials = 'Basic ' + Base64::encode64("#{configuration.username}:#{configuration.api_password}").chomp
-      response = RestClient.post "#{configuration.json_base_uri}/payouts", params.to_json, { content_type: 'application/json', accept: :json, Authorization: encoded_credentials }
+      encoded_credentials = 'Basic ' + Base64.encode64("#{configuration.username}:#{configuration.api_password}").chomp
+      response = RestClient.post "#{configuration.json_base_uri}/payouts", params.to_json, content_type: 'application/json', accept: :json, Authorization: encoded_credentials
       raise ResponseError.new(code: response.code, body: response.body) if response.code != 200
 
       hash = JSON.parse(response.body)
