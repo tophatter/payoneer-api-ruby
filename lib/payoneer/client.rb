@@ -39,7 +39,7 @@ module Payoneer
       )
     end
 
-    # Includes additional items as needed to be Payoneer SAFE compliant (https://app.asana.com/0/440902128870182/473284740903863/f)
+    # Includes additional items as needed to be Payoneer SAFE compliant
     def expanded_payout(payee_id:, client_reference_id:, amount:, currency: 'USD', description:, payout_date: Time.now, seller_id:, seller_name:, seller_url:, seller_type: 'ECOMMERCE', path:)
       params = {
         payee_id: payee_id,
