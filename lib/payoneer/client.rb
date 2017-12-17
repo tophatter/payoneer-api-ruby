@@ -80,12 +80,7 @@ module Payoneer
       if hash.key?('Code')
         Response.new(hash['Code'], hash['Description'])
       else
-        hash = if block_given?
-          yield(hash)
-        else
-          hash
-        end
-
+        hash = block_given? ? yield(hash) : hash
         Response.new(Response::OK_STATUS_CODE, hash)
       end
     end
@@ -112,12 +107,7 @@ module Payoneer
       if hash.key?('Code')
         Response.new(hash['Code'], hash['Description'])
       else
-        hash = if block_given?
-          yield(hash)
-        else
-          hash
-        end
-
+        hash = block_given? ? yield(hash) : hash
         Response.new(Response::OK_STATUS_CODE, hash)
       end
     end
