@@ -66,12 +66,31 @@ client.payee_details('fake-payee-id').body
     
 ```
 
+##### Performing a normal payout:
+```ruby
+response = client.payout(
+  program_id: 'fake-partner-id',
+  payment_id: 43,
+  amount: 100.0,
+  payee_id: 42,
+  description: "Foo Bar's order"
+)
+
+response.body
+=> {
+    "Description" => "",
+      "PaymentID" => "1234",
+         "Status" => "000",
+     "PayoneerID" => "42"
+}
+````
+
 ##### Performing a payout with expanded params:
 `credentials_type` must be either `"AUTHORIZATION"` or `"PASSWORD"`
 - If `credentials_type` is `"AUTHORIZATION"`, `token` is required
 - If `credentials_type` is `"PASSWORD"`, `user_name` and `password` are required
 ```ruby
-client.expanded_payout(
+response = client.expanded_payout(
   payee_id: 42,
   client_reference_id: 43,
   amount: 100.0, 
@@ -84,6 +103,17 @@ client.expanded_payout(
   credentials_type: 'AUTHORIZATION', 
   token: 'fake_token'
 )
+
+response.body
+=> {
+       "audit_id" => 123456789,
+           "code" => 0,
+    "description" => "Success",
+      "payout_id" => "1234",
+         "amount" => 100.0,
+       "currency" => "USD",
+      "PaymentID" => "1234"
+}
 ```
 
 #### Console:
