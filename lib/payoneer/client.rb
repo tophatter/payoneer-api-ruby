@@ -75,6 +75,7 @@ module Payoneer
       raise ResponseError.new(code: response.code, body: response.body) if response.code != 200
 
       hash = JSON.parse(response.body)
+      hash['PaymentID'] = hash['payout_id'] # Keep consistent with the normal payout response body
 
       if hash.key?('Code')
         Response.new(hash['Code'], hash['Description'])
