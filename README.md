@@ -63,6 +63,27 @@ client.payee_details('fake-payee-id').body
     "AccountNumber"=>"123456789",
     "RoutingNumber"=>"121042882",
     "AccountType"=>"S"}}
+    
+```
+
+##### Performing a payout with expanded params:
+`credentials_type` must be either `"AUTHORIZATION"` or `"PASSWORD"`
+- If `credentials_type` is `"AUTHORIZATION"`, `token` is required
+- If `credentials_type` is `"PASSWORD"`, `user_name` and `password` are required
+```ruby
+client.expanded_payout(
+  payee_id: 42,
+  client_reference_id: 43,
+  amount: 100.0, 
+  description: "Foo Bar's order",
+  seller_id: 44, 
+  seller_name: "Foo Bar", 
+  seller_url: "foo@bar.com", 
+  seller_type: 'ECOMMERCE', 
+  path: 'orders@path.com', 
+  credentials_type: 'AUTHORIZATION', 
+  token: 'fake_token'
+)
 ```
 
 #### Console:
