@@ -88,13 +88,13 @@ describe Payoneer::Client do
     let(:payee_id) { 42 }
     let(:client_reference_id) { 43 }
     let(:amount) { 100 }
+    let(:currency) { 'USD' }
     let(:description) { (Time.now - 10.days).strftime('%Y-%m-%d') }
     let(:seller_id) { 44 }
     let(:seller_name) { 'Fake Seller' }
     let(:seller_url) { 'http://tophatter.dev/users/1' }
     let(:path) { 'fake_s3@path.com' }
-    let(:credentials_type) { 'AUTHORIZATION' }
-    let(:token) { 'FILL_ME_IN' }
+    let(:credentials) { { type: 'AUTHORIZATION', token: 'fake' } }
     let(:endpoint) { "#{configuration.json_base_uri}/payouts" }
     let(:headers) { { content_type: 'application/json', accept: :json, Authorization: 'Basic ' + Base64.encode64("#{configuration.username}:#{configuration.api_password}").chomp } }
     let(:response) do
@@ -123,19 +123,14 @@ describe Payoneer::Client do
           orders: {
             type: 'url',
             path: path,
-            credentials: {
-              type: credentials_type,
-              token: token,
-              user_name: '',
-              password: ''
-            }
+            credentials: credentials
           }
         } }
     end
 
     it 'generates the correct response' do
       expect(RestClient).to receive(:post).exactly(1).times.with(endpoint, params.to_json, headers).and_return(response)
-      response = client.expanded_payout(payee_id: payee_id, client_reference_id: client_reference_id, amount: amount, description: description, seller_id: seller_id, seller_name: seller_name, seller_url: seller_url, path: path, credentials_type: credentials_type, token: token)
+      response = client.expanded_payout(payee_id: payee_id, client_reference_id: client_reference_id, amount: amount, description: description, currency: currency, seller_id: seller_id, seller_name: seller_name, seller_url: seller_url, path: path, credentials: credentials)
       expect(response.ok?).to be_truthy
       expect(response.body).to include('payee_id' => payee_id, 'amount' => amount)
       expect(response.body).to include('orders_report')
