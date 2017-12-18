@@ -3,7 +3,7 @@
 # gem push payoneer-client-{VERSION}.gem
 Gem::Specification.new do |s|
   s.name        = 'payoneer-client'
-  s.version     = '0.3'
+  s.version     = '0.4'
   s.platform    = Gem::Platform::RUBY
   s.licenses    = ['MIT']
   s.authors     = ['Chris Estreich']
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.extra_rdoc_files = ['README.md']
 
-  s.required_ruby_version = '~> 2.2'
+  s.required_ruby_version = '~> 2.0'
 
   s.add_dependency 'activesupport', '~> 4.2'
   s.add_dependency 'rest-client', '~> 1.6'
