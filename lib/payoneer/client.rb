@@ -40,7 +40,7 @@ module Payoneer
     end
 
     # Includes additional items as needed to be Payoneer SAFE compliant
-    def expanded_payout(payee_id:, client_reference_id:, amount:, currency: 'USD', description:, payout_date: Time.now, seller_id:, seller_name:, seller_url:, seller_type: 'ECOMMERCE', path:, credentials_type:, token: '', user_name: '', password: '')
+    def expanded_payout(payee_id:, client_reference_id:, amount:, currency:, description:, payout_date: Time.now, seller_id:, seller_name:, seller_url:, seller_type: 'ECOMMERCE', orders_type: 'url', path:, credentials:)
       params = {
         payee_id: payee_id,
         client_reference_id: client_reference_id,
@@ -58,14 +58,9 @@ module Payoneer
             }
           },
           orders: {
-            type: 'url',
+            type: orders_type,
             path: path,
-            credentials: {
-              type: credentials_type,
-              token: token,
-              user_name: user_name,
-              password: password
-            }
+            credentials: credentials
           }
         }
       }
