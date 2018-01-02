@@ -63,6 +63,57 @@ client.payee_details('fake-payee-id').body
     "AccountNumber"=>"123456789",
     "RoutingNumber"=>"121042882",
     "AccountType"=>"S"}}
+    
+```
+
+##### Performing a normal payout:
+```ruby
+response = client.payout(
+  program_id: 'fake-partner-id',
+  payment_id: 43,
+  amount: 100.0,
+  payee_id: 42,
+  description: "Foo Bar's order"
+)
+
+response.body
+=> {
+    "Description" => "",
+      "PaymentID" => "1234",
+         "Status" => "000",
+     "PayoneerID" => "42"
+}
+````
+
+##### Performing a payout with expanded params:
+If the orders type is `"url"`, `credentials` must be a dictionary containing one of the following:
+- `type: "AUTHORIZATION"` with a required `token` field
+- `type: "PASSWORD"` with required `user_name` and `password` fields
+```ruby
+response = client.expanded_payout(
+  payee_id: 42,
+  client_reference_id: 43,
+  amount: 100.0, 
+  currency: 'USD',
+  description: "Foo Bar's order",
+  seller_id: 44, 
+  seller_name: "Foo Bar", 
+  seller_url: "foo@bar.com", 
+  seller_type: 'ECOMMERCE', 
+  path: 'orders@path.com', 
+  credentials: { type: 'AUTHORIZATION', token: 'fake_token'}
+)
+
+response.body
+=> {
+       "audit_id" => 123456789,
+           "code" => 0,
+    "description" => "Success",
+      "payout_id" => "1234",
+         "amount" => 100.0,
+       "currency" => "USD",
+      "PaymentID" => "1234"
+}
 ```
 
 #### Console:

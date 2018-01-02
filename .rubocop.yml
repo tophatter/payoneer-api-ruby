@@ -24,6 +24,8 @@ Lint/EndAlignment:
 
 Style/Documentation:
   Enabled: false
+Style/FormatStringToken:
+  Enabled: false
 Style/IndentationWidth:
   Enabled: false
 Style/ElseAlignment:

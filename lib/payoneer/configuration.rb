@@ -18,8 +18,12 @@ module Payoneer
       @host || 'api.payoneer.com'
     end
 
-    def base_uri
-      @base_uri || "#{protocol}://#{host}/Payouts/HttpApi/API.aspx"
+    def xml_base_uri
+      @xml_base_uri || "#{protocol}://#{host}/Payouts/HttpApi/API.aspx"
+    end
+
+    def json_base_uri
+      @json_base_uri || "#{protocol}://#{host}/v2/programs/#{@partner_id}"
     end
   end
 end
