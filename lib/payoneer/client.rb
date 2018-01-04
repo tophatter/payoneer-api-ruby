@@ -66,17 +66,19 @@ module Payoneer
       }
 
       encoded_credentials = 'Basic ' + Base64.encode64("#{configuration.username}:#{configuration.api_password}").chomp
-      response = RestClient.post "#{configuration.json_base_uri}/payouts", params.to_json, content_type: 'application/json', accept: :json, Authorization: encoded_credentials
-      raise ResponseError.new(code: response.code, body: response.body) if response.code != 200
 
-      hash = JSON.parse(response.body)
-      hash['PaymentID'] = hash['payout_id'] # Keep consistent with the normal payout response body
+      begin
+        response = RestClient.post "#{configuration.json_base_uri}/payouts", params.to_json, content_type: 'application/json', accept: :json, Authorization: encoded_credentials
+        raise ResponseError.new(code: response.code, body: response.body) if response.code != 200
 
-      if hash.key?('Code')
-        Response.new(hash['Code'], hash['Description'])
-      else
-        hash = block_given? ? yield(hash) : hash
-        Response.new(Response::OK_STATUS_CODE, hash)
+        hash = JSON.parse(response.body)
+        hash['PaymentID'] = hash['payout_id'] # Keep consistent with the normal payout response body
+
+        create_response(hash)
+      rescue RestClient::BadRequest, RestClient::ResourceNotFound => e
+        hash = JSON.parse(e.response)
+
+        create_response(hash)
       end
     end
 
@@ -99,6 +101,15 @@ module Payoneer
       # @TODO: Validate that the response is XML?
       hash = Hash.from_xml(response.body).values.first
 
+      if hash.key?('Code')
+        Response.new(hash['Code'], hash['Description'])
+      else
+        hash = block_given? ? yield(hash) : hash
+        Response.new(Response::OK_STATUS_CODE, hash)
+      end
+    end
+
+    def create_response(hash)
       if hash.key?('Code')
         Response.new(hash['Code'], hash['Description'])
       else
