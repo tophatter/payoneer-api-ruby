@@ -69,16 +69,16 @@ module Payoneer
 
       begin
         response = RestClient.post "#{configuration.json_base_uri}/payouts", params.to_json, content_type: 'application/json', accept: :json, Authorization: encoded_credentials
-        raise ResponseError.new(code: response.code, body: response.body) if response.code != 200
 
         hash = JSON.parse(response.body)
         hash['PaymentID'] = hash['payout_id'] # Keep consistent with the normal payout response body
 
         create_response(hash)
-      rescue RestClient::BadRequest, RestClient::ResourceNotFound => e
-        hash = JSON.parse(e.response)
-
-        create_response(hash)
+      rescue RestClient::Exception => e
+        if e.http_body
+          hash = JSON.parse(e.http_body)
+          create_response(hash)
+        end
       end
     end
 
