@@ -77,7 +77,7 @@ module Payoneer
       rescue RestClient::Exception => e
         if e.http_body
           hash = JSON.parse(e.http_body)
-          create_response(hash)
+          create_response(hash, e.http_code)
         end
       end
     end
@@ -109,12 +109,12 @@ module Payoneer
       end
     end
 
-    def create_response(hash)
+    def create_response(hash, http_code)
       if hash.key?('Code')
         Response.new(hash['Code'], hash['Description'])
       else
         hash = block_given? ? yield(hash) : hash
-        Response.new(Response::OK_STATUS_CODE, hash)
+        Response.new(http_code, hash)
       end
     end
   end
