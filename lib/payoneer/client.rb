@@ -109,7 +109,7 @@ module Payoneer
       end
     end
 
-    def create_response(hash, http_code)
+    def create_response(hash, http_code=Response::OK_STATUS_CODE)
       if hash.key?('Code')
         Response.new(hash['Code'], hash['Description'])
       else
