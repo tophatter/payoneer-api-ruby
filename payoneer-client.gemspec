@@ -3,11 +3,11 @@
 # gem push payoneer-client-{VERSION}.gem
 Gem::Specification.new do |s|
   s.name        = 'payoneer-client'
-  s.version     = '0.4.1'
+  s.version     = '0.5.0'
   s.platform    = Gem::Platform::RUBY
   s.licenses    = ['MIT']
-  s.authors     = ['Chris Estreich']
-  s.email       = ['chris@tophatter.com']
+  s.authors     = ['Chris Estreich', 'Todd Eichel']
+  s.email       = ['chris@tophatter.com', 'todd@tophatter.com']
   s.homepage    = 'https://github.com/tophatter/payoneer-api-ruby'
   s.summary     = 'Payoneer SDK for ruby.'
   s.description = 'Payoneer SDK for ruby.'

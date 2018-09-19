@@ -66,6 +66,23 @@ client.payee_details('fake-payee-id').body
     
 ```
 
+##### Advanced HTTP Client Options
+
+If you need to do additional configuration on the underlying HTTP client (RestClient), you can pass additional config under an `http_client_options` key and this will be passed through directly to the HTTP client.
+
+```ruby
+client = Payoneer::Client.new(
+  Payoneer::Configuration.new(
+    username: 'fake-username',
+    api_password: 'fake-api-password',
+    partner_id: 'fake-partner-id',
+    http_client_options: {
+      verify_ssl: true
+    }
+  )
+)
+```
+
 ##### Performing a normal payout:
 ```ruby
 response = client.payout(
