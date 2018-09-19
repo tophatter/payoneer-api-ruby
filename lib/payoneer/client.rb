@@ -65,10 +65,18 @@ module Payoneer
         }
       }
 
-      encoded_credentials = 'Basic ' + Base64.encode64("#{configuration.username}:#{configuration.api_password}").chomp
-
       begin
-        response = RestClient.post "#{configuration.json_base_uri}/payouts", params.to_json, content_type: 'application/json', accept: :json, Authorization: encoded_credentials
+        response = RestClient::Request.execute(
+          method: :post,
+          url: "#{configuration.json_base_uri}/payouts",
+          payload: params.to_json,
+          headers: {
+            content_type: 'application/json',
+            accept: :json,
+            Authorization: 'Basic ' + Base64.encode64("#{configuration.username}:#{configuration.api_password}").chomp
+          },
+          **configuration.http_client_options
+        )
 
         hash = JSON.parse(response.body)
         hash['PaymentID'] = hash['payout_id'] # Keep consistent with the normal payout response body
@@ -89,12 +97,17 @@ module Payoneer
     private
 
     def post(method_name, params = {})
-      response = RestClient.post(configuration.xml_base_uri, {
-        mname: method_name,
-        p1: configuration.username,
-        p2: configuration.api_password,
-        p3: configuration.partner_id
-      }.merge(params))
+      response = RestClient::Request.execute(
+        method: :post,
+        url: configuration.xml_base_uri,
+        payload: {
+          mname: method_name,
+          p1: configuration.username,
+          p2: configuration.api_password,
+          p3: configuration.partner_id
+        }.merge(params),
+        **configuration.http_client_options
+      )
 
       raise ResponseError.new(code: response.code, body: response.body) if response.code != 200
 
