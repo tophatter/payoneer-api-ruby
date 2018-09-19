@@ -147,7 +147,7 @@ describe Payoneer::Client do
 
     it 'passes HTTP client options to HTTP client' do
       expect(RestClient::Request).to receive(:execute).with(hash_including(verify_ssl: true)).and_return(response)
-      response = client.status
+      client.status
     end
   end
 end
