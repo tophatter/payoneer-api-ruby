@@ -66,7 +66,21 @@ client.payee_details('fake-payee-id').body
     
 ```
 
-##### Advanced HTTP Client Options
+##### Advanced Options
+
+If you need to interact with an API host other than the default Payoneer
+production/sandbox API URLs, you can pass a `host` option to the configuration:
+
+```ruby
+client = Payoneer::Client.new(
+  Payoneer::Configuration.new(
+    username: 'fake-username',
+    api_password: 'fake-api-password',
+    partner_id: 'fake-partner-id',
+    host: 'myspecial.api.payoneer.com'
+  )
+)
+```
 
 If you need to do additional configuration on the underlying HTTP client (RestClient), you can pass additional config under an `http_client_options` key and this will be passed through directly to the HTTP client.
 

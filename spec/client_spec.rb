@@ -142,12 +142,23 @@ describe Payoneer::Client do
   end
 
   describe 'configuration' do
-    let(:config_options) { default_config_options.merge(http_client_options: { verify_ssl: true }) }
     let(:xml) { "<?xml version='1.0' encoding='ISO-8859-1' ?><PayoneerResponse><Status>000</Status><Description>Echo Ok - All systems are up.</Description></PayoneerResponse>" }
 
-    it 'passes HTTP client options to HTTP client' do
-      expect(RestClient::Request).to receive(:execute).with(hash_including(verify_ssl: true)).and_return(response)
-      client.status
+    describe 'http_client_options' do
+      let(:config_options) { default_config_options.merge(http_client_options: { verify_ssl: true }) }
+      it 'passes HTTP client options to HTTP client' do
+        expect(RestClient::Request).to receive(:execute).with(hash_including(verify_ssl: true)).and_return(response)
+        client.status
+      end
+    end
+
+    describe 'host' do
+      let(:config_options) { default_config_options.merge(host: 'api.example.com') }
+      it 'allows using a custom API host' do
+        expected_url = 'https://api.example.com/Payouts/HttpApi/API.aspx'
+        expect(RestClient::Request).to receive(:execute).with(hash_including(url: expected_url)).and_return(response)
+        client.status
+      end
     end
   end
 end
