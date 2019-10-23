@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.5
 
 Metrics/AbcSize:
   Enabled: false
@@ -19,22 +19,20 @@ Metrics/BlockLength:
 Metrics/ParameterLists:
   Enabled: false
 
-Lint/EndAlignment:
+Layout/EndAlignment:
+  Enabled: false
+Layout/IndentationWidth:
+  Enabled: false
+Layout/ElseAlignment:
   Enabled: false
 
 Style/Documentation:
   Enabled: false
 Style/FormatStringToken:
   Enabled: false
-Style/IndentationWidth:
-  Enabled: false
-Style/ElseAlignment:
-  Enabled: false
 Style/GuardClause:
   Enabled: false
 Style/NumericLiterals:
   Enabled: false
-
-# This is temporary - it can be remove after updating rubocop to the latest.
-Style/PercentLiteralDelimiters:
+Style/FrozenStringLiteralComment:
   Enabled: false
