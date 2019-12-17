@@ -3,7 +3,7 @@
 # gem push payoneer-client-{VERSION}.gem
 Gem::Specification.new do |s|
   s.name        = 'payoneer-client'
-  s.version     = '0.7.0'
+  s.version     = '0.8.0'
   s.platform    = Gem::Platform::RUBY
   s.licenses    = ['MIT']
   s.authors     = ['Chris Estreich', 'Todd Eichel']
