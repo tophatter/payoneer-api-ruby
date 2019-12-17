@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.version     = '0.8.0'
   s.platform    = Gem::Platform::RUBY
   s.licenses    = ['MIT']
-  s.authors     = ['Chris Estreich', 'Todd Eichel']
-  s.email       = ['chris@tophatter.com', 'todd@tophatter.com']
+  s.authors     = ['Chris Estreich']
+  s.email       = ['chris@tophatter.com']
   s.homepage    = 'https://github.com/tophatter/payoneer-api-ruby'
   s.summary     = 'Payoneer SDK for ruby.'
   s.description = 'Payoneer SDK for ruby.'
